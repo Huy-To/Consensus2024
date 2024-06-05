@@ -1,6 +1,6 @@
 "use client";
 
-import { authenticate, userSession, getUserData } from "../../libs/auth";
+import { authenticate, userSession, getUserData } from "../../libs/v1/auth";
 import { useState, useEffect } from "react";
 import Head from "next/head";
 import { redirect } from "next/navigation";

@@ -1,5 +1,5 @@
 "use client";
-import { getUserData } from "../../../libs/auth";
+import { getUserData } from "../../../libs/v1/auth";
 import { useState, useEffect } from "react";
 import React from 'react';
 import Head from 'next/head';

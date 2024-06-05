@@ -5,7 +5,7 @@ import {
 } from "@stacks/connect";
 import { uintCV, stringUtf8CV } from "@stacks/transactions";
 import { StacksMocknet } from "@stacks/network";
-import { userSession, getUserData } from "./auth";
+import { userSession, getUserData } from "./v1/auth";
 
 
 const [conditions, setConditions] = useState("");
