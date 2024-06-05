@@ -23,5 +23,5 @@ On going project from [Consensus 2024](https://consensus2024.coindesk.com/) Hack
 
 ---
 ## Contributors
-[Huy To](www.linkedin.com/in/huyto5689)
-[Benna Su](https://www.linkedin.com/in/bsu6/)
+- [Huy To](www.linkedin.com/in/huyto5689)
+- [Benna Su](https://www.linkedin.com/in/bsu6/)
