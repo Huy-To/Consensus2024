@@ -8,4 +8,6 @@
 ## PROGRESS
 - [ ] Seperate All Components For Future Purposes
 - [ ] Website Layouts
+- [ ] Storing User Information in Gaia
+- [ ] Fetching User Information to display
 - [ ] 
