@@ -1,15 +1,45 @@
-"use client"
-import React, { ReactNode } from 'react'
 
-export default function Form() {
+import { useForm, SubmitHandler } from 'react-hook-form'
+import React, { ReactNode } from 'react'
+import { userInformation, saveProfile } from '../../libs/storage'
+
+
+export type FormFields = {
+    name: string;
+    jobTitle: string;
+    about: string;
+    imageURL: string;
+    github: string;
+    linkdin: string;
+    website: string;
+    x: string;
+    children: ReactNode;
+}
+
+const onSubmit: SubmitHandler<FormFields> = async (data) => {
+    // Update the userInformation object with the form data
+    userInformation.name = data.name;
+    userInformation.jobTitle = data.jobTitle;
+    userInformation.about = data.about;
+    userInformation.imageURL = data.imageURL;
+    userInformation.socialLinks.github = data.github;
+    userInformation.socialLinks.linkedin = data.linkdin;
+    userInformation.socialLinks.website = data.website;
+    userInformation.socialLinks.x = data.x;
+
+// Save the updated userInformation to the storage
+    await saveProfile(userInformation);
+}
+
+const { handleSubmit, register } = useForm<FormFields>({
+    mode: 'onChange'
+})
+
+export const Form: React.FC<FormFields> = ({ children,...other }) => {
     return (
         <div>
-            <section className="text-center mt-6 mb-6">
-                <span className="block text-5xl font-bold font-mono text-color-Logo">Eleutheria DEMO</span>
-                <span className="mt-6 block text-3xl font-semibold font-mono text-white">Profile Sign Up</span>
-            </section>
             <section className="flex justify-center items-center">
-                <form action="" className="w-1/2 h-full space-y-8">
+                <form className="w-1/2 h-full space-y-8" onSubmit={handleSubmit(onSubmit)} {...other}>
                     <div className="p-8 border-b md:col-span-1">
                         <div className="text-center text-lg font-medium leading-6 text-gray-900">Profile Information</div>
                         <div className="mt-2 text-sm text-gray-500 text-center">This information will be displayed publicly</div>
@@ -22,9 +52,9 @@ export default function Form() {
                             </div>
                             <div className="flex my-2 rounded">
                                 <input
-                                    id="UserName"
-                                    name="Name"
-                                    type="UserName"
+                                    {...register('name', { required: true })}
+                                    type="text"
+                                    placeholder=''
                                     className="flex-1 block w-full min-w-0 px-3 py-2 border text-gray-700 border-gray-300 rounded text-sm"
                                 />
                             </div>
@@ -36,9 +66,9 @@ export default function Form() {
                             </div>
                             <div className="flex my-2 rounded">
                                 <input
-                                    id="JobTitle"
-                                    name="Job Title"
+                                    {...register('jobTitle', { required: false })}
                                     type="text"
+                                    placeholder=''
                                     className="flex-1 block w-full min-w-0 px-3 py-2 border text-gray-700 border-gray-300 rounded text-sm"
                                 />
                             </div>
@@ -50,9 +80,9 @@ export default function Form() {
                             </div>
                             <div className="flex my-2 rounded">
                                 <textarea
-                                    id="About"
-                                    name="About"
+                                    {...register('about', { required: false })}
                                     rows={3}
+                                    placeholder=''
                                     className="flex-1 block w-full min-w-0 px-3 py-2 border text-gray-700 border-gray-300 rounded text-sm"
                                 ></textarea>
                             </div>
@@ -64,9 +94,9 @@ export default function Form() {
                             </div>
                             <div className="flex my-2 rounded">
                                 <input
-                                    id="profileImageUrl"
-                                    name="profileImageUrl"
+                                    {...register('imageURL', { required: false })}
                                     type="text"
+                                    placeholder=''
                                     className="flex-1 block w-full min-w-0 px-3 py-2 border text-gray-700 border-gray-300 rounded text-sm"
                                 />
                             </div>
@@ -86,9 +116,9 @@ export default function Form() {
                             </div>
                             <div className="flex my-2 rounded">
                                 <input
-                                    id="socials.X"
-                                    name="socials.X"
+                                    {...register('x', { required: false })}
                                     type="text"
+                                    placeholder=''
                                     className="flex-1 block w-full min-w-0 px-3 py-2 border text-gray-700 border-gray-300 rounded text-sm"
                                 />
                             </div>
@@ -100,9 +130,9 @@ export default function Form() {
                             </div>
                             <div className="flex my-2 rounded">
                                 <input
-                                    id="socials.github"
-                                    name="socials.github"
+                                    {...register('github', { required: false })}
                                     type="text"
+                                    placeholder=''
                                     className="flex-1 block w-full min-w-0 px-3 py-2 border text-gray-700 border-gray-300 rounded text-sm"
                                 />
                             </div>
@@ -114,9 +144,9 @@ export default function Form() {
                             </div>
                             <div className="flex my-2 rounded">
                                 <input
-                                    id="socials.website"
-                                    name="socials.website"
+                                    {...register('website', { required: false })}
                                     type="text"
+                                    placeholder=''
                                     className="flex-1 block w-full min-w-0 px-3 py-2 border text-gray-700 border-gray-300 rounded text-sm"
                                 />
                             </div>
@@ -128,9 +158,9 @@ export default function Form() {
                             </div>
                             <div className="flex my-2 rounded">
                                 <input
-                                    id="socials.linkedin"
-                                    name="socials.linkedin"
+                                    {...register('linkdin', { required: false })}
                                     type="text"
+                                    placeholder=''
                                     className="flex-1 block w-full min-w-0 px-3 py-2 border text-gray-700 border-gray-300 rounded text-sm"
                                 />
                             </div>

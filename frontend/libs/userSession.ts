@@ -7,7 +7,7 @@ import { Person, Profile } from '@stacks/profile';
 import { makeECPrivateKey, getPublicKeyFromPrivate } from '@stacks/encryption';
 
 
-const appConfig = new AppConfig(['store_write', 'publish_data']);
+const appConfig = new AppConfig(['store_write', 'publish_data'], 'https://Eleutheria.com');
 export const userSession = new UserSession({ appConfig }); // Use this export from other files
 
 // Get UserData on Stacks Ecosystem
@@ -33,3 +33,6 @@ export function getUserKeys() {
     userPublicKey: keys.publicKey
   };
 }
+
+// Getting App PrivateKey (the appPrivateKey is automatically derived and provided by the authentication process)
+export const AppPrivateKey = getUserData().appPrivateKey;

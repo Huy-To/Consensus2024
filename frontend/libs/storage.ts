@@ -3,17 +3,39 @@
 "use server"
 
 import { hasAppPrivateKey } from "@stacks/connect";
-import { getUserKeys, userSession, getUserData, getPerson } from "./userSession"
+import { getUserKeys, userSession, getUserData, getPerson, AppPrivateKey } from "./userSession"
 import { Storage } from "@stacks/storage";
 
-// User's PrivateKey 
-const { userPrivateKey, userPublicKey } = getUserKeys();
+const storage = new Storage({ userSession });
 
-// Getting App PrivateKey (the appPrivateKey is automatically derived and provided by the authentication process)
-const privateKey = userSession.loadUserData().appPrivateKey
+const PROFILE_FILENAME = 'profile.json';
 
-const storage = new Storage({userSession});
+export const userInformation = {
+    name: '',
+    jobTitle: '',
+    imageURL: '',
+    about: '',
+    socialLinks: {
+        x: '',
+        github: '',
+        linkedin: '',
+        website: '',
 
+    }
+}
+
+
+// saveProfile in Gaia
+export const saveProfile = async (profile: any) => {
+    return await storage.putFile(
+        PROFILE_FILENAME,
+        JSON.stringify({ profile, isPublic: true }),
+        {
+            encrypt: false,
+            dangerouslyIgnoreEtag: true
+        }
+    )
+}
 
 
 
