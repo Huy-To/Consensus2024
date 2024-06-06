@@ -1,28 +1,11 @@
 // Initiating a storage client
-"use server"
 
 import { hasAppPrivateKey } from "@stacks/connect";
-import { userSession, getUserData, getPerson, getUserKeys, AppPrivateKey, gaiaUrl } from "./userSession"
-import { Storage } from "@stacks/storage";
+import { userSession, storage } from "@/app/page";
 
-export const storage = new Storage({ userSession });
-const appPrivateKey = AppPrivateKey;
+
 const PROFILE_FILENAME = 'profile.json';
-const person = getPerson();
 
-
-export const userInformation = {
-    name: '',
-    jobTitle: '',
-    imageURL: '',
-    about: '',
-    socialLinks: {
-        x: '',
-        github: '',
-        linkedin: '',
-        website: '',
-    }
-}
 
 
 // saveProfile in Gaia
@@ -38,15 +21,45 @@ export const saveProfile = async (profile: any) => {
 }
 
 // fetchProfile in Gaia
-export const fetchProfile = async (profile: any) => {
+export const fetchProfile = async () => {
     try {
+      const profileJson: any = await storage.getFile(PROFILE_FILENAME, {
+        decrypt: false,
+        app: 'https://Eleutheria.com',
+      });
+      if (profileJson) {
+        const json = JSON.parse(profileJson);
+        return {
+          profile: json?.profile
+        };
+      }
+      return {
+        profile: null
+      };
+    } catch (e) {
+      console.log('refetchiching');
+      try {
         const profileJson: any = await storage.getFile(PROFILE_FILENAME, {
-            decrypt: false,
-            app: 'https://Eleutheria.com',
+          decrypt: false,
+          app: 'https://Eleutheria.com',
+          verify: false
         });
-        return profileJson;
+        if (profileJson) {
+          const json = JSON.parse(profileJson);
+          return {
+            profile: json?.profile
+          };
+        }
+        return {
+          profile: null
+        };
+      } catch (error) {
+        console.error(error);
+      }
     }
-} 
+  }
+
+
 //AUTHENTICATION FIRST => UserData (STACKS ECOSYSTEM Generates UserData after authentication)
 
 

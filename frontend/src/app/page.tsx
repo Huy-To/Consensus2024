@@ -3,15 +3,16 @@
 import { useState, useEffect } from "react";
 import Head from "next/head";
 import { redirect } from "next/navigation";
-import { storage, fetchProfile } from "../../libs/storage";
 import { showConnect, AppConfig, UserSession, getKeys } from "@stacks/connect"
 import { Person, Profile } from '@stacks/profile';
 import { useRouter } from "next/navigation"; // Import useRouter from next/navigation
+import { Storage, connectToGaiaHub } from "@stacks/storage";
 
 const appDomain = 'https://www.Eleutheria.com'; // shown in wallet pop-up
 const myAppIcon = 'window.location.origin'; // + '/my_logo.png' // shown in wallet pop-up
 const appConfig = new AppConfig(['store_write', 'publish_data'], 'https://Eleutheria.com');
 export const userSession = new UserSession({ appConfig }); // Use this export from other files
+export const storage = new Storage({ userSession });
 
 
 
@@ -31,7 +32,7 @@ export default function Home() {
       },
       redirectTo: '/',
       onFinish: () => {
-        router.push('/homePage'); // Use router.push for navigation
+        router.push('/newUser'); // Use router.push for navigation
       },
       onCancel: () => {
         console.log('oops'); // WHEN user cancels/closes pop-up
@@ -47,8 +48,12 @@ export default function Home() {
     } else if (userSession.isUserSignedIn()) {
       setLoggedIn(true);
       setUserData(userSession.loadUserData());
-      // console.log("Authenticated")
-      // console.log(userSession.loadUserData())
+      if (!storage.getFile('profile.json')) {
+        router.push('/userNew')
+      } else {
+        router.push('/newUser')
+      }
+      // console.log(connectToGaiaHub)
       // window.location.assign("/homePage")
     }
   }, []);

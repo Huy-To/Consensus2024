@@ -3,12 +3,16 @@
 import { useRouter } from 'next/navigation'
 import React from 'react';
 import Head from 'next/head';
-
+import { userSession } from '../page';
+import { storage } from '../page';
+import { fetchProfile,  } from '../../../libs/storage';
 
 
 const HomePage: React.FC = () => {
 
   const router = useRouter()
+  // console.log(userSession.loadUserData());
+  console.log(fetchProfile())
 
   return (
     <>

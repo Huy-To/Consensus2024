@@ -1,7 +1,6 @@
-
 import { useForm, SubmitHandler } from 'react-hook-form'
 import React, { ReactNode } from 'react'
-import { userInformation, saveProfile } from '../../libs/storage'
+import { saveProfile } from '../../libs/storage'
 
 
 export type FormFields = {
@@ -14,6 +13,19 @@ export type FormFields = {
     website: string;
     x: string;
     children: ReactNode;
+}
+
+export const userInformation = {
+    name: '',
+    jobTitle: '',
+    imageURL: '',
+    about: '',
+    socialLinks: {
+        x: '',
+        github: '',
+        linkedin: '',
+        website: '',
+    }
 }
 
 const onSubmit: SubmitHandler<FormFields> = async (data) => {
@@ -34,11 +46,12 @@ const onSubmit: SubmitHandler<FormFields> = async (data) => {
     console.log(userInformation);
 }
 
-const { handleSubmit, register } = useForm<FormFields>({
-    mode: 'onChange'
-})
 
 export const Form: React.FC<FormFields> = ({ children,...other }) => {
+    const { handleSubmit, register } = useForm<FormFields>({
+        mode: 'onChange'
+    })
+    
     return (
         <div>
             <section className="flex justify-center items-center">
