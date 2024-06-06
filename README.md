@@ -6,7 +6,7 @@
 On going project from [Consensus 2024](https://consensus2024.coindesk.com/) Hackathon
 
 ## Features (In Progress)
-- [ ] Authenticate users with [Stacks Wallets](https://www.stacks.co/explore/find-a-wallet#walletsearch).
+- [x] Authenticate users with [Stacks Wallets](https://www.stacks.co/explore/find-a-wallet#walletsearch).
 - [ ] Initiate Private Hub for each user.
 - [ ] Create and store the user's profile and blog posts in Gaia.
 - [ ] Editing profile, users' blogs using Stacks.JS
