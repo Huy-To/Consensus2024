@@ -1,14 +1,15 @@
 // Initiating a storage client
-
 "use server"
 
 import { hasAppPrivateKey } from "@stacks/connect";
-import { getUserKeys, userSession, getUserData, getPerson, AppPrivateKey } from "./userSession"
+import { userSession, getUserData, getPerson, getUserKeys, AppPrivateKey, gaiaUrl } from "./userSession"
 import { Storage } from "@stacks/storage";
 
-const storage = new Storage({ userSession });
-
+export const storage = new Storage({ userSession });
+const appPrivateKey = AppPrivateKey;
 const PROFILE_FILENAME = 'profile.json';
+const person = getPerson();
+
 
 export const userInformation = {
     name: '',
@@ -20,7 +21,6 @@ export const userInformation = {
         github: '',
         linkedin: '',
         website: '',
-
     }
 }
 
@@ -37,7 +37,17 @@ export const saveProfile = async (profile: any) => {
     )
 }
 
-
+// fetchProfile in Gaia
+export const fetchProfile = async (profile: any) => {
+    try {
+        const profileJson: any = await storage.getFile(PROFILE_FILENAME, {
+            decrypt: false,
+            app: 'https://Eleutheria.com',
+        });
+        return profileJson;
+    }
+} 
+//AUTHENTICATION FIRST => UserData (STACKS ECOSYSTEM Generates UserData after authentication)
 
 
 
@@ -61,6 +71,4 @@ export const saveProfile = async (profile: any) => {
 // userSession.store.getSessionData().userData = <any> {
 //     hasAppPrivateKey
 // }
-
-
 

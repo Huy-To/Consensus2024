@@ -1,3 +1,5 @@
+"use client"
+
 import {Form, FormFields} from "./base/Form";
 
 export default function EditForm() {

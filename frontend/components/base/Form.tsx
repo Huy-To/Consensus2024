@@ -29,6 +29,9 @@ const onSubmit: SubmitHandler<FormFields> = async (data) => {
 
 // Save the updated userInformation to the storage
     await saveProfile(userInformation);
+    console.log('Profile updated successfully');
+// Print out the updated userInformation to the console
+    console.log(userInformation);
 }
 
 const { handleSubmit, register } = useForm<FormFields>({
