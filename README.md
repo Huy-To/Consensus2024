@@ -12,8 +12,8 @@ On going project from [Consensus 2024](https://consensus2024.coindesk.com/) Hack
 - [x] Editing profile, users' blogs using Stacks.JS
 - [ ] Smart Contract Integration. 
 - [ ] Stacking Pool Functionality.
-- [ ] NFT 
-
+- [ ] NFT (SIP-009)
+- [ ] Elutheria Token (SIP-010)
 **Built with Next.JS, Stacks.JS, Clarity**
 
 ---
