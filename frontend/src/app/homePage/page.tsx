@@ -5,15 +5,35 @@ import React from 'react';
 import Head from 'next/head';
 import { userSession } from '../page';
 import { storage } from '../page';
-import { fetchProfile,  } from '../../../libs/storage';
+import { fetchProfile ,userProfile  } from '../../../libs/storage';
+import { useEffect, useState } from 'react';
 
 
 const HomePage: React.FC = () => {
 
-  const router = useRouter()
-  // console.log(userSession.loadUserData());
-  console.log(fetchProfile())
+  const router = useRouter();
+  const [profile, setProfile] = useState(Object);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data: any = await userProfile();
+        setProfile(data);
+        console.log(typeof data);
+      } catch (error) {
+        setError('Error fetching profile');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+
+  }, []);
+
+  const { about, imageURL, jobTitle, name, socialLinks, x, github, linkedin, website } = profile;
   return (
     <>
       <Head>
@@ -31,7 +51,7 @@ const HomePage: React.FC = () => {
         <section className="flex flex-col justify-center items-center mb-6">
           <div className="h-24 w-24 bg-gray-200 rounded-full mb-6"></div>
           <button className="block text-3xl font-semibold font-mono text-white"
-          onClick={() => router.push('../newUser')}>@Soju</button>
+          onClick={() => router.push('../newUser')}>{profile.name}</button>
         </section>
         <section className="relative flex justify-center items-center h-screen">
           <div className="absolute inset-0 z-0 w-full h-auto">

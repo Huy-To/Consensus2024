@@ -43,15 +43,14 @@ const onSubmit: SubmitHandler<FormFields> = async (data) => {
     await saveProfile(userInformation);
     console.log('Profile updated successfully');
 // Print out the updated userInformation to the console
-    console.log(userInformation);
 }
 
 
 export const Form: React.FC<FormFields> = ({ children,...other }) => {
     const { handleSubmit, register } = useForm<FormFields>({
         mode: 'onChange'
-    })
-    
+    });
+
     return (
         <div>
             <section className="flex justify-center items-center">

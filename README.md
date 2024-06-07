@@ -12,6 +12,10 @@ On going project from [Consensus 2024](https://consensus2024.coindesk.com/) Hack
 - [ ] Create and store users' blogs in Gaia.
 - [x] Editing profile using Stacks.JS.
 - [ ] Editing users' blogs using Stacks.JS.
+=======
+- [ ] Create and store the user's blog post in Gaia.
+- [x] Editing profile, users' blogs using Stacks.JS
+>>>>>>> Stashed changes
 - [ ] Smart Contract Integration. 
 - [ ] Stacking Pool Functionality.
 - [ ] NFT (SIP-009)
