@@ -8,8 +8,10 @@ On going project from [Consensus 2024](https://consensus2024.coindesk.com/) Hack
 ## Features (In Progress)
 - [x] Authenticate users with [Stacks Wallets](https://www.stacks.co/explore/find-a-wallet#walletsearch).
 - [ ] Initiate Private Hub for each user.
-- [ ] Create and store the user's profile and blog posts in Gaia.
-- [x] Editing profile, users' blogs using Stacks.JS
+- [x] Create and store the user's profile in Gaia.
+- [ ] Create and store users' blogs in Gaia.
+- [x] Editing profile using Stacks.JS.
+- [ ] Editing users' blogs using Stacks.JS.
 - [ ] Smart Contract Integration. 
 - [ ] Stacking Pool Functionality.
 - [ ] NFT (SIP-009)
@@ -20,7 +22,7 @@ On going project from [Consensus 2024](https://consensus2024.coindesk.com/) Hack
 ## Tasks:
 - [x] Connect Gaia
 - [x] Write to Gaia
-- [ ] Figure out how to display the data
+- [x] Figure out how to display the data
 
 ## Important Notice
 **THE MAIN BRANCH IS NOT THE UPDATED VERSION**
