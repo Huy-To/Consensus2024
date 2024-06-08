@@ -15,7 +15,6 @@ export const userSession = new UserSession({ appConfig }); // Use this export fr
 export const storage = new Storage({ userSession });
 
 
-
 export default function Home() {
   const [userData, setUserData] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);

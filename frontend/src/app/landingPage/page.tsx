@@ -5,8 +5,9 @@ import React from 'react';
 import Head from 'next/head';
 import { userSession } from '../page';
 import { storage } from '../page';
-import { fetchProfile ,userProfile  } from '../../../libs/storage';
+import { fetchProfile, userProfile } from '../../../libs/storage';
 import { useEffect, useState } from 'react';
+import LandingPage from '../../../components/LandingPage';
 
 
 const HomePage: React.FC = () => {
@@ -34,8 +35,18 @@ const HomePage: React.FC = () => {
   }, []);
 
   const { about, imageURL, jobTitle, name, socialLinks, x, github, linkedin, website } = profile;
+
   return (
-    <>
+    <div className=''>
+      <LandingPage></LandingPage>
+    </div>
+
+  );
+};
+
+export default HomePage;
+
+{/* <>
       <Head>
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -90,8 +101,4 @@ const HomePage: React.FC = () => {
           </p>
         </section>
       </body>
-    </>
-  );
-};
-
-export default HomePage;
+    </> */}

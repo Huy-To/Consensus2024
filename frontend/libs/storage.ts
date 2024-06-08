@@ -1,10 +1,12 @@
 // Initiating a storage client
 
+
 import { hasAppPrivateKey } from "@stacks/connect";
 import { userSession, storage } from "@/app/page";
 
 
 const PROFILE_FILENAME = 'profile.json';
+
 interface SocialLinks {
   x: string;
   github: string;
@@ -18,7 +20,7 @@ interface Profile {
   jobTitle: string;
   name: string;
   socialLinks: SocialLinks;
-}
+};
 
 
 // saveProfile in Gaia
@@ -83,9 +85,9 @@ export const fetchProfile = async (): Promise<{ profile: any } | null> => {
     .then((result) => {
       if (result && result.profile) {
         const profile = result.profile;
-        const { about, imageURL, jobTitle, name, socialLinks } = profile;
+        const { about, imageURL, jobTitle, name, socialLinks, location } = profile;
         const { x, github, linkedin, website } = socialLinks;
-        return { about, imageURL, jobTitle, name, socialLinks, x, github, linkedin, website }
+        return { about, imageURL, jobTitle, name, socialLinks, x, github, linkedin, website, location }
         console.log('About:', about);
         console.log('Image URL:', imageURL);
         console.log('Job Title:', jobTitle);

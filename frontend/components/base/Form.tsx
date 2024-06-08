@@ -1,10 +1,12 @@
 import { useForm, SubmitHandler } from 'react-hook-form'
 import React, { ReactNode } from 'react'
-import { saveProfile } from '../../libs/storage'
+import { fetchProfile, saveProfile, userProfile } from '../../libs/storage'
+import { storage, userSession } from '@/app/page';
 
 
 export type FormFields = {
     name: string;
+    location: string;
     jobTitle: string;
     about: string;
     imageURL: string;
@@ -20,6 +22,7 @@ export const userInformation = {
     jobTitle: '',
     imageURL: '',
     about: '',
+    location: '',
     socialLinks: {
         x: '',
         github: '',
@@ -34,6 +37,7 @@ const onSubmit: SubmitHandler<FormFields> = async (data) => {
     userInformation.jobTitle = data.jobTitle;
     userInformation.about = data.about;
     userInformation.imageURL = data.imageURL;
+    userInformation.location = data.location;
     userInformation.socialLinks.github = data.github;
     userInformation.socialLinks.linkedin = data.linkdin;
     userInformation.socialLinks.website = data.website;
@@ -51,6 +55,8 @@ export const Form: React.FC<FormFields> = ({ children,...other }) => {
         mode: 'onChange'
     });
 
+
+    console.log(userProfile());
     return (
         <div>
             <section className="flex justify-center items-center">
@@ -110,6 +116,20 @@ export const Form: React.FC<FormFields> = ({ children,...other }) => {
                             <div className="flex my-2 rounded">
                                 <input
                                     {...register('imageURL', { required: false })}
+                                    type="text"
+                                    placeholder=''
+                                    className="flex-1 block w-full min-w-0 px-3 py-2 border text-gray-700 border-gray-300 rounded text-sm"
+                                />
+                            </div>
+                        </div>
+                        <div>
+                            <div className="flex items-center justify-between">
+                                <label className="text-sm font-medium text-gray-700">Location</label>
+                                <div></div>
+                            </div>
+                            <div className="flex my-2 rounded">
+                                <input
+                                    {...register('location', { required: false })}
                                     type="text"
                                     placeholder=''
                                     className="flex-1 block w-full min-w-0 px-3 py-2 border text-gray-700 border-gray-300 rounded text-sm"

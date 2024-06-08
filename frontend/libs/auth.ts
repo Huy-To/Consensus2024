@@ -1,4 +1,4 @@
-"user server"
+"use server"
 import { userSession } from "@/app/page";
 import { Person, Profile } from '@stacks/profile';
 import { getKeys } from "@stacks/connect";
