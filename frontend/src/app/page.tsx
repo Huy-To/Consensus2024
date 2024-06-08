@@ -1,48 +1,61 @@
 "use client";
 
-import { authenticate, userSession, getUserData } from "../../libs/v1/auth";
 import { useState, useEffect } from "react";
 import Head from "next/head";
 import { redirect } from "next/navigation";
-import { fetchProfile } from "../../libs/storage";
-import { storage } from "../../libs/storage";
+import { showConnect, AppConfig, UserSession, getKeys } from "@stacks/connect"
+import { Person, Profile } from '@stacks/profile';
+import { useRouter } from "next/navigation"; // Import useRouter from next/navigation
+import { Storage, connectToGaiaHub } from "@stacks/storage";
 
-  export default function Home() {
-    const [userData, setUserData] = useState({});
-    const [loggedIn, setLoggedIn] = useState(false);
-    const [hasProfile, setHasProfile] = useState(false);
-  
-    useEffect(() => {
-      if (userSession.isSignInPending()) {
-        userSession.handlePendingSignIn().then((userData) => {
-          setUserData(userData);
-        }).catch((error) => {
-          console.error(error);
-          // Handle error
-        });
+const appDomain = 'https://www.Eleutheria.com'; // shown in wallet pop-up
+const myAppIcon = 'window.location.origin'; // + '/my_logo.png' // shown in wallet pop-up
+const appConfig = new AppConfig(['store_write', 'publish_data'], 'https://Eleutheria.com');
+export const userSession = new UserSession({ appConfig }); // Use this export from other files
+export const storage = new Storage({ userSession });
+
+
+export default function Home() {
+  const [userData, setUserData] = useState({});
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [hasProfile, setHasProfile] = useState(false);
+  const router = useRouter(); // Use useRouter for navigation
+
+  // Authentication with the wallet 
+  function authenticate() {
+    showConnect({
+      userSession, // Passing UserSession
+      appDetails: {
+        name: appDomain,
+        icon: myAppIcon,
+      },
+      redirectTo: '/',
+      onFinish: () => {
+        router.push('/newUser'); // Use router.push for navigation
+      },
+      onCancel: () => {
+        console.log('oops'); // WHEN user cancels/closes pop-up
+      },
+    })
+  }
+
+  useEffect(() => {
+    if (userSession.isSignInPending()) {
+      userSession.handlePendingSignIn().then((userData) => {
+        setUserData(userData);
+      });
+    } else if (userSession.isUserSignedIn()) {
+      setLoggedIn(true);
+      setUserData(userSession.loadUserData());
+      if (!storage.getFile('profile.json')) {
+        router.push('/userNew')
+      } else {
+        router.push('/newUser')
       }
-    }, []);
-  
-    useEffect(() => {
-      if (userSession.isUserSignedIn()) {
-        setLoggedIn(true);
-        setUserData(getUserData());
-        storage.getFile('profile.json', { decrypt: true })
-          .then((data) => {
-            if (data) {
-              // User has a profile, redirect to the main app page
-              redirect('/homePage');
-            } else {
-              // User is signed in but doesn't have a profile, redirect to sign-up page
-              redirect('/newUser');
-            }
-          })
-          .catch((error) => {
-            console.error(error);
-            // Handle error
-          });
-      }
-    }, [userSession.isUserSignedIn()]);
+      // console.log(connectToGaiaHub)
+      // window.location.assign("/homePage")
+    }
+  }, []);
 
   return (
     <main className="w-screen h-screen flex flex-col justify-center items-center">
@@ -54,7 +67,7 @@ import { storage } from "../../libs/storage";
         <spline-viewer url="https://prod.spline.design/JAJrUTiiOyvBfKPe/scene.splinecode"></spline-viewer>
       </div>
       <div className="absolute z-10 flex flex-col items-center">
-        <p className="text-zinc-950 text-6xl pt-8 pb-8 font-mono bg-opacity-75 rounded z-10">
+        <p className="text-zinc-900 text-6xl pt-8 pb-8 font-mono bg-opacity-75 rounded z-10">
           Eleutheria DEMO
         </p>
         <button

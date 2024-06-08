@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl": "./", // Set the base directory for resolving non-relative module names
     "lib": [
       "dom",
       "dom.iterable",
@@ -26,7 +27,7 @@
         "./src/*"
       ],
       "@homePage/*": [
-        "./src/app/homePage/*"
+        "src/app/landingPage/*"
       ]
     }
   },
