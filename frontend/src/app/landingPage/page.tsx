@@ -8,6 +8,7 @@ import { storage } from '../page';
 import { fetchProfile, userProfile } from '../../../libs/storage';
 import { useEffect, useState } from 'react';
 import LandingPage from '../../../components/LandingPage';
+import { About } from 'components/base/About';
 
 
 const HomePage: React.FC = () => {
@@ -38,7 +39,7 @@ const HomePage: React.FC = () => {
 
   return (
     <div className=''>
-      <LandingPage></LandingPage>
+      <LandingPage more = { <About marketplace='/hiringPage' community='/community'></About> }></LandingPage>
     </div>
 
   );

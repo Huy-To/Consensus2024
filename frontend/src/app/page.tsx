@@ -3,10 +3,13 @@
 import { useState, useEffect } from "react";
 import Head from "next/head";
 import { redirect } from "next/navigation";
-import { showConnect, AppConfig, UserSession, getKeys } from "@stacks/connect"
+import { showConnect, AppConfig, UserSession } from "@stacks/connect"
 import { Person, Profile } from '@stacks/profile';
 import { useRouter } from "next/navigation"; // Import useRouter from next/navigation
 import { Storage, connectToGaiaHub } from "@stacks/storage";
+import { profile } from "console";
+import { fetchProfile } from '../../libs/storage';
+
 
 const appDomain = 'https://www.Eleutheria.com'; // shown in wallet pop-up
 const myAppIcon = 'window.location.origin'; // + '/my_logo.png' // shown in wallet pop-up
@@ -31,7 +34,7 @@ export default function Home() {
       },
       redirectTo: '/',
       onFinish: () => {
-        router.push('/newUser'); // Use router.push for navigation
+        window.location.reload()
       },
       onCancel: () => {
         console.log('oops'); // WHEN user cancels/closes pop-up
@@ -39,23 +42,35 @@ export default function Home() {
     })
   }
 
+
+
   useEffect(() => {
-    if (userSession.isSignInPending()) {
-      userSession.handlePendingSignIn().then((userData) => {
+    const profileCheck = async () => {
+      if (userSession.isSignInPending()) {
+        const userData = await userSession.handlePendingSignIn();
         setUserData(userData);
-      });
-    } else if (userSession.isUserSignedIn()) {
-      setLoggedIn(true);
-      setUserData(userSession.loadUserData());
-      if (!storage.getFile('profile.json')) {
-        router.push('/userNew')
-      } else {
-        router.push('/newUser')
+      } else if (userSession.isUserSignedIn()) {
+        setLoggedIn(true);
+        setUserData(userSession.loadUserData());
+
+        try {
+          const profile = await fetchProfile();
+          if (!profile) {
+            // Do something if fetchProfile() does not return anything
+            router.push('/newUser');
+          } else {
+            // Do something if fetchProfile() returns a profile
+            router.push('/landingPage');
+          }
+        } catch (error) {
+          console.error('Error fetching profile:', error);
+          // Handle error scenario, e.g., show an error message or redirect
+        }
       }
-      // console.log(connectToGaiaHub)
-      // window.location.assign("/homePage")
-    }
-  }, []);
+    };
+
+    profileCheck();
+  }, [router]);
 
   return (
     <main className="w-screen h-screen flex flex-col justify-center items-center">

@@ -88,15 +88,6 @@ export const fetchProfile = async (): Promise<{ profile: any } | null> => {
         const { about, imageURL, jobTitle, name, socialLinks, location } = profile;
         const { x, github, linkedin, website } = socialLinks;
         return { about, imageURL, jobTitle, name, socialLinks, x, github, linkedin, website, location }
-        console.log('About:', about);
-        console.log('Image URL:', imageURL);
-        console.log('Job Title:', jobTitle);
-        console.log('Name:', name);
-        console.log('Social Links:', socialLinks);
-        console.log('X:', x);
-        console.log('GitHub:', github);
-        console.log('LinkedIn:', linkedin);
-        console.log('Website:', website);
         // Do something with the profile
       } else {
         console.log('Profile not found');
