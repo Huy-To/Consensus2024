@@ -27,6 +27,11 @@ On going project from [Consensus 2024](https://consensus2024.coindesk.com/) Hack
 - [x] Connect Gaia
 - [x] Write to Gaia
 - [x] Figure out how to display the data
+- [x] Authenticate Users, and redirect them to sign up page if they dont have a 'profile.json' in Gaia, and redirect them to landing page if they already have a 'profile.json' in Gaia
+- [x] Redesign HomePage -> Landing Page
+- [x] Redesign Profile Page
+- [ ] Redesign newUser -> Sign Up Page
+- [ ]
 - [ ] 3x3 Display for blog posts
 
 ## Ideas:

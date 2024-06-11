@@ -1,5 +1,5 @@
 "use client";
-import { getUserData } from "../../../libs/v1/auth";
+
 import { useState, useEffect } from "react";
 import React from 'react';
 import Head from 'next/head';
@@ -9,7 +9,6 @@ import { StacksMocknet } from "@stacks/network";
 export default function HiringPage() {
   const [conditions, setConditions] = useState("");
   const [price, setPrice] = useState();
-  const userData = getUserData
   
   const network = new StacksMocknet();
 

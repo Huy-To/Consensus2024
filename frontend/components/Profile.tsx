@@ -2,11 +2,12 @@
 
 import React from 'react'
 import { Container } from './base/Container'
-import { Nav } from './base/Nav'
+import { Nav, ProfileNav} from './base/Nav'
 import { Welcome } from './base/Welcome'
 import { Card } from './base/Card'
 import { useEffect, useState } from 'react';
 import { fetchProfile, userProfile } from '../libs/storage'
+import { ProfileSection } from './base/ProfileSection'
 
 
 export const Profile = () => {
@@ -32,7 +33,7 @@ export const Profile = () => {
     }, []);
 
     const { location, about, imageURL, jobTitle, name, socialLinks, x, github, linkedin, website } = profile;
-
+    console.log(userProfile());
     return (
         <div className='m-32 '>
             <Container>
@@ -40,7 +41,8 @@ export const Profile = () => {
                 <Welcome back='Back' name={profile.name} quote={profile.jobTitle}>
                 <div className="text-black text-2xl ">{profile.location}</div>
                 </Welcome>
-                {/* <Card></Card> */}
+                <ProfileNav></ProfileNav>
+                <ProfileSection children={undefined} name={profile.name} about={profile.about} x={profile.x} github={profile.github} linkedin={profile.linkedin} website={profile.website}></ProfileSection>
             </Container>
         </div>
     )
