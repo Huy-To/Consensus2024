@@ -30,11 +30,12 @@ On going project from [Consensus 2024](https://consensus2024.coindesk.com/) Hack
 - [x] Authenticate Users, and redirect them to sign up page if they dont have a 'profile.json' in Gaia, and redirect them to landing page if they already have a 'profile.json' in Gaia
 - [x] Redesign HomePage -> Landing Page
 - [x] Redesign Profile Page
+- [x] Redesign HiringPage
 - [ ] Redesign newUser -> Sign Up Page
-- [ ]
-- [ ] 3x3 Display for blog posts
+- [ ] Smart Contract Integration
 
 ## Ideas:
+- [ ] 3x3 Display for blog posts
 
 
 ## Important Notice
@@ -54,3 +55,6 @@ On going project from [Consensus 2024](https://consensus2024.coindesk.com/) Hack
 ## Contributors
 - [Huy To](www.linkedin.com/in/huyto5689)
 - [Benna Su](https://www.linkedin.com/in/bsu6/)
+
+## Notes
+[Details IN PROGRESS](https://hackmd.io/tA7YbXG7QDadCjxjb5wc8Q)
