@@ -45,8 +45,11 @@ On going project from [Consensus 2024](https://consensus2024.coindesk.com/) Hack
 ## Working Links to test
 - `localhost:{portNumber}`
 - `localhost:{portNumber}/landingPage`
-- `localhost:{portNumber}/profile`
+- `localhost:{portNumber}/hiringPage`
+- `localhost:{portNumber}/profilePage`
 - `localhost:{portNumber}/newUser`
+
+
 ---
 
 `As the project progresses, we may consider implementing additional functionalities and developing new ideas to bring more goods into the world and to our users. The goal is to create a community where everyone can learn from each other and grow.`
